@@ -1,0 +1,46 @@
+@import "_nullstyle";						//Импорт файлов обнуляющих стилей
+
+$fz: 80px;										//Создание переменной
+
+%tplborder{										//Создание шаблона
+	border-bottom: 5px dotted black;
+}
+
+@mixin fontz ($f) {							//Создание миксина
+	font-size: $f;
+}
+
+.block{
+	background-color: #666;
+	width: 300px / 960px * 100%;
+	line-height: 60px;
+	>p{											/*> означает, что применится только к селекторам первого уровня (именно которые находятся в block)*/
+		color: red;
+	}
+	.block__text{
+		font-size: $fz;
+		span{
+			color: red;
+		}
+	}
+	& .link{
+		font-size: 40px;
+		color: red;
+	}
+}
+
+.link{
+	color: blue;
+	text-decoration: underline;
+	font-size: $fz;
+	&:hover{														//Вместо & подставляется название класса родителя
+		color: green;
+	}
+	@extend %tplborder;										//Подключение шаблона
+}
+
+.link-2 {
+	@include fontz (150px);									//Подключение миксина
+	@extend %tplborder;
+	border-bottom: 5px dotted blue;
+}
